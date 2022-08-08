@@ -1,0 +1,67 @@
+﻿@model staj_son.Models.arac_kayit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>arac_kayit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.marka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.durum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.durum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.yakit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yakit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vites)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vites)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ucret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ucret)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.plaka }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

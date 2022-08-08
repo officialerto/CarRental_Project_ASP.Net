@@ -1,0 +1,72 @@
+﻿@model staj_son.Models.arac_kayit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+
+    <hr />
+    <table class="table table-bordered table-sm">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.marka)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.model)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.durum)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.yakit)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.vites)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ucret)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody style="background-color:floralwhite; color: black;">
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.marka)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.model)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.durum)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.yakit)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.vites)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.ucret)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.plaka }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

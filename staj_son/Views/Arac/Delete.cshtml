@@ -1,0 +1,73 @@
+﻿@model staj_son.Models.arac_kayit
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.marka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.durum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.durum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.yakit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yakit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vites)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vites)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ucret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ucret)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

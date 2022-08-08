@@ -1,0 +1,64 @@
+﻿@model IEnumerable<staj_son.Models.arac_kayit>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.marka)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.durum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.yakit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vites)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ucret)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.marka)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.durum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.yakit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vites)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ucret)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.plaka }) |
+            @Html.ActionLink("Details", "Details", new { id=item.plaka }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.plaka })
+        </td>
+    </tr>
+}
+
+</table>

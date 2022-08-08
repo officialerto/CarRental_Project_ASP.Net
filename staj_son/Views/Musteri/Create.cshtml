@@ -1,0 +1,73 @@
+﻿@model staj_son.Models.musteri
+
+@{ 
+    ViewBag.Title = "Create";
+                    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Musteri", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.tc, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.tc, new { htmlAttributes = new { @class = "form-control", @placeholder = "TC Kimlik" } })
+                                @Html.ValidationMessageFor(model => model.tc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ad_soyad, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ad_soyad, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ad Soyad" } })
+                                @Html.ValidationMessageFor(model => model.ad_soyad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.adres, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.adres, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adres" } })
+                                @Html.ValidationMessageFor(model => model.adres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.telefon, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.telefon, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefon" } })
+                                @Html.ValidationMessageFor(model => model.telefon, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ehliyet, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" name="ehliyet" id="ehliyet" />
+                                @*@Html.EditorFor(model => model.ehliyet, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.ValidationMessageFor(model => model.ehliyet, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

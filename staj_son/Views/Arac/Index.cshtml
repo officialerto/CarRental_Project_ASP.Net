@@ -1,0 +1,107 @@
+﻿@model IEnumerable<staj_son.Models.arac_kayit>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ARAÇLAR</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<style>
+    a.plaka {
+        color: black;
+    }
+    a.marka {
+        color: black;
+    }
+    a.model {
+        color: black;
+    }
+    a.vites {
+        color: black;
+    }
+    a.durum {
+        color: black;
+    }
+    a.ucret {
+        color: black;
+    }
+    a.yakit {
+        color: black;
+    }
+</style>
+
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+    @using (Html.BeginForm("Index", "Arac", FormMethod.Get))
+    {
+
+        <thead class="table-striped">
+            <tr>
+                <th>
+                    @Html.ActionLink("Plaka", "Index", "Arac", new { SortOrder = ViewBag.plaka }, new { @class = "plaka" })
+                </th>
+                <th>
+                    @Html.ActionLink("Marka", "Index", "Arac", new { SortOrder = ViewBag.marka }, new { @class = "marka" })
+                </th>
+                <th>
+                    @Html.ActionLink("Model", "Index", "Arac", new { SortOrder = ViewBag.model }, new { @class = "model" })
+                </th>
+                <th>
+                    @Html.ActionLink("Durum", "Index", "Arac", new { SortOrder = ViewBag.durum }, new { @class = "durum" })
+                </th>
+                <th>
+                    @Html.ActionLink("Yakıt", "Index", "Arac", new { SortOrder = ViewBag.yakit }, new { @class = "yakit" })
+                </th>
+                <th>
+                    @Html.ActionLink("Vites", "Index", "Arac", new { SortOrder = ViewBag.vites }, new { @class = "vites" })
+                </th>
+                <th>
+                    @Html.ActionLink("Ücret", "Index", "Arac", new { SortOrder = ViewBag.ucret }, new { @class = "ucret" })
+                </th>
+                <th>
+                    Diğer
+                </th>
+            </tr>
+
+        </thead>
+    }
+    <tbody style="color: black;">
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.plaka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.marka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.durum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.yakit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vites)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ucret)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.plaka }, new { @class = "btn btn-primary col-sm-4" })
+                @Html.ActionLink("Details", "Details", new { id = item.plaka }, new { @class = "btn btn-warning col-sm-4" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.plaka }, new { @class = "btn btn-danger col-sm-4" })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

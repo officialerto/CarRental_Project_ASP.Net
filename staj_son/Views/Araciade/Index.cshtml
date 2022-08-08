@@ -1,0 +1,104 @@
+﻿@*@{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+<div class="container" >
+
+    <div class="row" >
+
+        <div class="col-sm-4" >
+
+            @using (Html.BeginForm("Save", "araciade", FormMethod.Post, new { id = "popupForm" }))
+            {
+                <div>
+                    <h1>
+                        ARAÇ İADE
+                    </h1>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Araç Plaka</label>
+                    <input type="text" id="plaka" name="plaka" class="form-control" placeholder="Araç Plakası" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Müşteri TC</label>
+                    <input type="number" id="musteri_id" name="musteri_id" class="form-control" placeholder="Müşteri TC" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tarih</label>
+                    <input type="text" id="tarih" name="tarih" class="form-control" placeholder="Tarih" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Gecikme</label>
+                    <input type="text" id="gecikme" name="gecikme" class="form-control" placeholder="Gecikme" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Ceza Miktarı</label>
+                    <input type="text" id="ceza" name="ceza" class="form-control" placeholder="Ceza Miktarı" required>
+                </div>
+
+                <div class="form-group"> 
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts
+{
+
+    @*JS KUTUPHANELERİ*@
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script>
+
+        getAracid();
+
+        function getAracid() {
+
+            $("#plaka").keyup(function (e) {
+
+                $.ajax({
+
+                    type: 'POST', /*WEB SUNUCUYA VERİ GÖNDERME, GÜNCELLEME*/
+                    url: '/araciade/Gettc?plaka=' + $("#plaka").val(),
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                        console.log(data)
+
+                        $('#musteri_id').val(data[0].Musteriid);
+                        $('#tarih').val(new Date(parseInt(data[0].IadeTarihi.substr(6))).toLocaleDateString());
+                        $('#gecikme').val(data[0].Gecikme);
+
+                        var gecikme = data[0].Gecikme;
+                        /*Gecikme gün başına 100 ₺ ekliyor*/
+                        if (gecikme > 0) {
+
+                            var ceza = gecikme * 100;
+                            $('#ceza').val(ceza.toString());
+                        }
+                        else {
+
+                            $('#ceza').val("0");
+
+                        }
+                    }
+
+                });
+
+            });
+
+        }
+
+    </script>
+
+
+
+}

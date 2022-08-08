@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="car_rental_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="arac_iade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plaka" Type="varchar" MaxLength="50" />
+          <Property Name="musteri_id" Type="int" />
+          <Property Name="tarih" Type="date" />
+          <Property Name="gecikme" Type="int" />
+          <Property Name="ceza" Type="int" />
+        </EntityType>
+        <EntityType Name="arac_kayit">
+          <Key>
+            <PropertyRef Name="plaka" />
+          </Key>
+          <Property Name="plaka" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="marka" Type="varchar" MaxLength="50" />
+          <Property Name="model" Type="varchar" MaxLength="50" />
+          <Property Name="durum" Type="varchar" MaxLength="50" />
+          <Property Name="yakit" Type="varchar" MaxLength="50" />
+          <Property Name="vites" Type="varchar" MaxLength="50" />
+          <Property Name="ucret" Type="money" />
+        </EntityType>
+        <EntityType Name="kiralama">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="arac_id" Type="varchar" MaxLength="50" />
+          <Property Name="musteri_id" Type="int" />
+          <Property Name="ucret" Type="money" />
+          <Property Name="alis_tarihi" Type="date" />
+          <Property Name="iade_tarihi" Type="date" />
+        </EntityType>
+        <EntityType Name="musteri">
+          <Key>
+            <PropertyRef Name="tc" />
+          </Key>
+          <Property Name="tc" Type="int" Nullable="false" />
+          <Property Name="ad_soyad" Type="varchar" MaxLength="50" />
+          <Property Name="adres" Type="varchar" MaxLength="50" />
+          <Property Name="telefon" Type="int" />
+          <Property Name="ehliyet" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="car_rental_dbModelStoreContainer">
+          <EntitySet Name="arac_iade" EntityType="Self.arac_iade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="arac_kayit" EntityType="Self.arac_kayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kiralama" EntityType="Self.kiralama" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="musteri" EntityType="Self.musteri" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="car_rental_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="arac_kayit">
+          <Key>
+            <PropertyRef Name="plaka" />
+          </Key>
+          <Property Name="plaka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="durum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="yakit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="vites" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ucret" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="kiralama">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arac_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="musteri_id" Type="Int32" />
+          <Property Name="ucret" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="alis_tarihi" Type="DateTime" Precision="0" />
+          <Property Name="iade_tarihi" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="musteri">
+          <Key>
+            <PropertyRef Name="tc" />
+          </Key>
+          <Property Name="tc" Type="Int32" Nullable="false" />
+          <Property Name="ad_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="Int32" />
+          <Property Name="ehliyet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="car_rental_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="arac_kayit" EntityType="Self.arac_kayit" />
+          <EntitySet Name="kiralamas" EntityType="Self.kiralama" />
+          <EntitySet Name="musteris" EntityType="Self.musteri" />
+          <EntitySet Name="arac_iade" EntityType="car_rental_dbModel.arac_iade" />
+        </EntityContainer>
+        <EntityType Name="arac_iade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plaka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="musteri_id" Type="Int32" />
+          <Property Name="tarih" Type="DateTime" Precision="0" />
+          <Property Name="gecikme" Type="Int32" />
+          <Property Name="ceza" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="car_rental_dbModelStoreContainer" CdmEntityContainer="car_rental_dbEntities">
+          <EntitySetMapping Name="arac_kayit">
+            <EntityTypeMapping TypeName="car_rental_dbModel.arac_kayit">
+              <MappingFragment StoreEntitySet="arac_kayit">
+                <ScalarProperty Name="plaka" ColumnName="plaka" />
+                <ScalarProperty Name="marka" ColumnName="marka" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="yakit" ColumnName="yakit" />
+                <ScalarProperty Name="vites" ColumnName="vites" />
+                <ScalarProperty Name="ucret" ColumnName="ucret" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kiralamas">
+            <EntityTypeMapping TypeName="car_rental_dbModel.kiralama">
+              <MappingFragment StoreEntitySet="kiralama">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="arac_id" ColumnName="arac_id" />
+                <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+                <ScalarProperty Name="ucret" ColumnName="ucret" />
+                <ScalarProperty Name="alis_tarihi" ColumnName="alis_tarihi" />
+                <ScalarProperty Name="iade_tarihi" ColumnName="iade_tarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="musteris">
+            <EntityTypeMapping TypeName="car_rental_dbModel.musteri">
+              <MappingFragment StoreEntitySet="musteri">
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="ad_soyad" ColumnName="ad_soyad" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="ehliyet" ColumnName="ehliyet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="arac_iade">
+            <EntityTypeMapping TypeName="car_rental_dbModel.arac_iade">
+              <MappingFragment StoreEntitySet="arac_iade">
+                <ScalarProperty Name="ceza" ColumnName="ceza" />
+                <ScalarProperty Name="gecikme" ColumnName="gecikme" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+                <ScalarProperty Name="plaka" ColumnName="plaka" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

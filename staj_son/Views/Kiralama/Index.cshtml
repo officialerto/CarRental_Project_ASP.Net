@@ -1,0 +1,215 @@
+﻿@model IEnumerable<staj_son.Models.KiralamaViewModel>
+
+@*@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+<div class="row">
+    <div class="col-sm-4">
+
+        @using (Html.BeginForm("Save", "kiralama", FormMethod.Post, new { id = "popupForm" }))
+        {
+            <div>
+                <h1>
+                    ARAÇ KİRALAMA
+                </h1>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Araç Plaka</label>
+                <select class="form-control" id="arac_id" name="arac_id" placeholder="Plaka" required>
+                    Plaka
+                    <option> Lütfen Seçin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Müşteri TC</label>
+                <input type="number" id="musteri_id" name="musteri_id" class="form-control" placeholder="Müşteri TC" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Müşteri İsim Soyisim</label>
+                <input type="text" id="ad_soyad" name="ad_soyad" class="form-control" placeholder="Müşteri İsim Soyisim" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Ücret</label>
+                <input type="text" id="ucret" name="ucret" class="form-control" placeholder="Ücret" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Alış Tarihi</label>
+                <input type="date" id="alis_tarihi" name="alis_tarihi" class="form-control" placeholder="Ücret" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">İade Tarihi</label>
+                <input type="date" id="iade_tarihi" name="iade_tarihi" class="form-control" placeholder="Ücret" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        }
+    </div>
+
+    <div class="col-sm-8">
+        <div>
+            <h1>
+                SON İŞLEMLER
+            </h1>
+        </div>
+        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <thead class="table-striped" style="color:black;">
+                <tr>
+
+                    <th>Plaka</th>
+                    <th>Müşteri TC</th>
+                    <th>Ücret</th>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Bitiş Tarihi</th>
+                    <th>Durum</th>
+
+                </tr>
+            </thead>
+            <tbody style="color: black;">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.arac_id</td>
+                        <td>@item.musteri_id</td>
+                        <td>@item.ucret</td>
+                        <td>@item.alis_tarihi</td>
+                        <td>@item.iade_tarihi</td>
+                        <td>@item.durum</td>    
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@*JAVASCRIPT KISMI*@
+
+    @section scripts
+{
+
+        <script src="~/Scripts/jquery-3.6.0.js"></script>
+        <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+
+        @*araçların listelenmesini sağlayan jquery*@
+        <script>
+            getArac();
+            load();
+            /*LOAD FONKSİYONU DİSAPPEAR YAPIYOR ALTTAKİLERİ*/
+            function load() {
+
+                $("#musteri_id").attr("disabled", "disabled");
+                $("#ad_soyad").attr("disabled", "disabled");
+                $("#ucret").attr("disabled", "disabled");
+                $("#alis_tarihi").attr("disabled", "disabled");
+                $("#iade_tarihi").attr("disabled", "disabled");
+
+            }
+
+            /*ARAC PLAKALARINI SIRALIYOR DROPDOWN'DA*/
+            function getArac() {
+                $.ajax({
+
+                    type: 'GET', /*WEB SUNUCUDAN VERİ ALMA*/
+                    url: '/kiralama/Getarac',
+                    dataType: 'JSON',
+                    success: function (data) {
+
+                        console.log(data);
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            $("#arac_id").append($("<option/>", {
+                                text: data[i].plaka
+                            }));
+                            
+                        }
+
+                    }
+
+                });
+
+            }
+
+            /*ALTTAKİLERİ GÖRÜNÜRLÜĞÜNÜ DEĞİŞTİRİYOR*/
+            $("#arac_id").change(function () {
+
+                durum();
+
+            });
+
+            function durum() {
+
+                $.ajax({
+
+                    type: 'POST', /*WEB SUNUCUYA VERİ GÖNDERME, GÜNCELLEME*/
+                    url: '/kiralama/Getdrm?plaka=' + $("#arac_id").val(),
+                    dataType: 'JSON',
+                    success: function (data) {
+                        console.log(data)
+
+                        var dur = data;
+
+                        if (dur == "Mevcut") {
+                            $("#musteri_id").removeAttr('disabled');
+                            $("#ad_soyad").removeAttr('disabled');
+                            $("#ucret").removeAttr('disabled');
+                            $("#alis_tarihi").removeAttr('disabled');
+                            $("#iade_tarihi").removeAttr('disabled');
+
+                        }
+                        else {
+                            $("#musteri_id").attr("disabled", "disabled");
+                            $("#ad_soyad").attr("disabled", "disabled");
+                            $("#ucret").attr("disabled", "disabled");
+                            $("#alis_tarihi").attr("disabled", "disabled");
+                            $("#iade_tarihi").attr("disabled", "disabled");
+
+                        }
+
+
+                    }
+
+                });
+
+            }
+
+
+            getMusteri();
+
+            function getMusteri() {
+                /*MÜŞTERİ BİLGİLERİNİ LOAD EDİYOR*/
+                $("#musteri_id").keyup(function (e) {
+                    /*keyup function klavyeden bastıgın tuşu bıraktıgın anda devreye girer*/
+                    $.ajax({
+
+                        type: 'POST', /*WEB SUNUCUYA VERİ GÖNDERME, GÜNCELLEME*/
+                        url: '/kiralama/Gettc?tc=' + $("#musteri_id").val(),
+                        dataType: 'JSON',
+                        success: function (data) {
+
+                            $("#ad_soyad").val(data)
+
+                        }
+
+                    });
+
+                });
+
+            }
+
+        </script>
+
+    }
+

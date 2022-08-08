@@ -1,0 +1,86 @@
+﻿@model IEnumerable<staj_son.Models.musteri>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MÜŞTERİLER</h2>
+
+<style>
+    /*ACTION LINKLERIN COLOR KISMI*/
+    a.tc {
+        color: black;
+    }
+    a.ad_soyad {
+        color: black;
+    }
+
+    a.adres {
+        color: black;
+    }
+
+    a.telefon {
+        color: black;
+    }
+</style>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-bordered">
+
+    @using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+    {
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("TC", "Index", "Musteri", new { SortOrder = ViewBag.tc }, new { @class = "tc" })
+                </th>
+                <th>
+                    @Html.ActionLink("Ad Soyad", "Index", "Musteri", new { SortOrder = ViewBag.ad_soyad }, new { @class = "ad_soyad" })
+                </th>
+                <th>
+                    @Html.ActionLink("Adres", "Index", "Musteri", new { SortOrder = ViewBag.adres }, new { @class = "adres" })
+                </th>
+                <th>
+                    @Html.ActionLink("Telefon", "Index", "Musteri", new { SortOrder = ViewBag.telefon }, new { @class = "telefon" })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ehliyet)
+                </th>
+                <th>
+                    Diğer
+                </th>
+            </tr>
+        </thead>
+    }
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ad_soyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefon)
+                </td>
+                <td>
+                      <img src="@item.ehliyet" width="80px" height="50px"/>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.tc }, new { @class = "btn btn-primary col-sm-4" })
+                    @Html.ActionLink("Details", "Details", new { id = item.tc }, new { @class = "btn btn-warning col-sm-4" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.tc }, new { @class = "btn btn-danger col-sm-4" })
+                </td>
+            </tr>
+            }
+        <tbody>
+    </table>
